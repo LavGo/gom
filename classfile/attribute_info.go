@@ -1,30 +1,31 @@
 package classfile
 
 var (
-	_attrDeprecated=&DeprecatedAttribute{}
-	_attrSynthetic=&SyntheticAttribute{}
+	_attrDeprecated = &DeprecatedAttribute{}
+	_attrSynthetic  = &SyntheticAttribute{}
 )
+
 type AttributeInfo interface {
 	readInfo(reader *ClassReader)
 }
 
 func readAttributes(reader *ClassReader, cp *ConstantPool) []AttributeInfo {
-	attrLength:=reader.readUint16()
-	attributes:=make([]AttributeInfo,attrLength)
-	for i := range attributes{
-		attributes[i]=readAttribute(reader,cp)
+	attrLength := reader.readUint16()
+	attributes := make([]AttributeInfo, attrLength)
+	for i := range attributes {
+		attributes[i] = readAttribute(reader, cp)
 	}
 	return attributes
 }
-func readAttribute(reader *ClassReader,cp *ConstantPool) AttributeInfo {
-	attrNameIndex:=reader.readUint16()
-	attrName:=cp.getUtf8(attrNameIndex)
-	attrLen:=reader.readUint32()
-	attributeInfo:=newAttributeInfo(attrName,cp)
-	if attributeInfo==nil{
-		attributeInfo=&UnparsedAttribute{
-			name:attrName,
-			length:attrLen,
+func readAttribute(reader *ClassReader, cp *ConstantPool) AttributeInfo {
+	attrNameIndex := reader.readUint16()
+	attrName := cp.getUtf8(attrNameIndex)
+	attrLen := reader.readUint32()
+	attributeInfo := newAttributeInfo(attrName, cp)
+	if attributeInfo == nil {
+		attributeInfo = &UnparsedAttribute{
+			name:   attrName,
+			length: attrLen,
 		}
 	}
 	attributeInfo.readInfo(reader)

@@ -17,10 +17,10 @@ func (self *ConstantUtf8Info) readInfo(reader *ClassReader) {
 func (self *ConstantUtf8Info) Str() string {
 	return self.str
 }
+
 /*func decodeMUTF8(bytes []byte) string {
 	return string(bytes) //TODO
 }*/
-
 
 // mutf8 -> utf16 -> utf32 -> string
 // see java.io.DataInputStream.readUTF(DataInput)

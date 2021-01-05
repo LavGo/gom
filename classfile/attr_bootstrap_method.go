@@ -20,13 +20,13 @@ type BootstrapMethod struct {
 	bootstrapArguments []uint16
 }
 
-func (self *BootstrapMethodsAttribute)readInfo(reader *ClassReader) {
+func (self *BootstrapMethodsAttribute) readInfo(reader *ClassReader) {
 	bootstrapMethodsLength := reader.readUint32()
 	self.bootstrapMethods = make([]*BootstrapMethod, bootstrapMethodsLength)
 	for i := range self.bootstrapMethods {
 		self.bootstrapMethods[i] = &BootstrapMethod{
-			bootstrapMethodRef:reader.readUint16(),
-			bootstrapArguments:reader.readUint16s(),
+			bootstrapMethodRef: reader.readUint16(),
+			bootstrapArguments: reader.readUint16s(),
 		}
 	}
 }

@@ -28,8 +28,9 @@ func (self *ConstantInvokeDynamicInfo) BootstrapMethodInfo() (uint16, []uint16) 
 	//bm := bmAttr.bootstrapMethods[self.bootstrapMethodAttrIndex]
 
 	//return bm.bootstrapMethodRef, bm.bootstrapArguments
-	return 0,nil
+	return 0, nil
 }
+
 /*
 CONSTANT_MethodType_info {
     u1 tag;
@@ -39,8 +40,9 @@ CONSTANT_MethodType_info {
 type ConstantMethodTypeInfo struct {
 	descrptorIndex uint16
 }
-func (self *ConstantMethodTypeInfo)readInfo(reader *ClassReader){
-	self.descrptorIndex=reader.readUint16()
+
+func (self *ConstantMethodTypeInfo) readInfo(reader *ClassReader) {
+	self.descrptorIndex = reader.readUint16()
 }
 
 /*
@@ -55,7 +57,7 @@ type ConstantMethodHandleInfo struct {
 	referenceIndex uint16
 }
 
-func (self *ConstantMethodHandleInfo)readInfo(reader *ClassReader)  {
-	self.referenceKind=reader.readUint8()
-	self.referenceIndex=reader.readUint16()
+func (self *ConstantMethodHandleInfo) readInfo(reader *ClassReader) {
+	self.referenceKind = reader.readUint8()
+	self.referenceIndex = reader.readUint16()
 }

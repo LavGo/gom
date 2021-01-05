@@ -39,29 +39,29 @@ func (self *ConstantPool) read(reader *ClassReader) {
 	return cp
 }*/
 
-func (self *ConstantPool)getConstantInfo(index uint16) ConstantInfo {
+func (self *ConstantPool) getConstantInfo(index uint16) ConstantInfo {
 	cpInfo := self.cpInfos[index]
 	if cpInfo == nil {
 		panic(fmt.Errorf("Bad constant pool index: %v!", index))
 	}
 	return cpInfo
 }
-func (self *ConstantPool)getNameAndType(index uint16) (string, string) {
+func (self *ConstantPool) getNameAndType(index uint16) (string, string) {
 	ntInfo := self.getConstantInfo(index).(*ConstantNameAndType)
 	name := self.getUtf8(ntInfo.nameIndex)
 	_type := self.getUtf8(ntInfo.descriptorIndex)
 	return name, _type
 
 }
-func (self *ConstantPool)getClassName(index uint16) string {
+func (self *ConstantPool) getClassName(index uint16) string {
 	classInfo := self.getConstantInfo(index).(*ConstantClassInfo)
 	return self.getUtf8(classInfo.nameIndex)
 }
-func (self *ConstantPool)getUtf8(index uint16) string {
+func (self *ConstantPool) getUtf8(index uint16) string {
 	utf8Info := self.getConstantInfo(index).(*ConstantUtf8Info)
 	return utf8Info.str
 }
 
-func (self *ConstantPool)Infos() []ConstantInfo {
+func (self *ConstantPool) Infos() []ConstantInfo {
 	return self.cpInfos
 }

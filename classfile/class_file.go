@@ -42,41 +42,41 @@ func (self *ClassFile) read(reader *ClassReader) {
 	self.superClass = reader.readUint16()
 	self.interfaces = reader.readUint16s()
 	self.fields = readMembers(reader, self.constantPool)
-	self.methods=readMembers(reader,self.constantPool)
-	self.attributes=readAttributes(reader,self.constantPool)
+	self.methods = readMembers(reader, self.constantPool)
+	self.attributes = readAttributes(reader, self.constantPool)
 }
-func (self *ClassFile)Magic()uint32{
+func (self *ClassFile) Magic() uint32 {
 	return self.magic
 }
 func (self *ClassFile) MajorVersion() uint16 {
 	return self.majorVersion
 }
-func (self *ClassFile)MinorVersion()uint16{
+func (self *ClassFile) MinorVersion() uint16 {
 	return self.minorVersion
 }
-func (self *ClassFile)ConstantPool()*ConstantPool{
+func (self *ClassFile) ConstantPool() *ConstantPool {
 	return self.constantPool
 }
 func (self *ClassFile) ClassName() string {
 	return self.constantPool.getClassName(self.thisClass) //
 }
-func (self *ClassFile)AccessFlags()uint16{
+func (self *ClassFile) AccessFlags() uint16 {
 	return self.accessFlags
 }
-func (self *ClassFile)SuperClassName()string  {
+func (self *ClassFile) SuperClassName() string {
 	return self.constantPool.getClassName(self.superClass)
 }
-func (self *ClassFile)InterfaceNames()[]string  {
-	interfaceNames:=make([]string,len(self.interfaces))
-	for index:=range interfaceNames{
-		interfaceNames[index]=self.constantPool.getClassName(self.interfaces[index])
+func (self *ClassFile) InterfaceNames() []string {
+	interfaceNames := make([]string, len(self.interfaces))
+	for index := range interfaceNames {
+		interfaceNames[index] = self.constantPool.getClassName(self.interfaces[index])
 	}
 	return interfaceNames
 }
-func (self *ClassFile)Fields()[]*MemberInfo{
+func (self *ClassFile) Fields() []*MemberInfo {
 	return self.fields
 }
-func (self *ClassFile)Methods()[]*MemberInfo{
+func (self *ClassFile) Methods() []*MemberInfo {
 	return self.methods
 }
 
